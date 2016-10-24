@@ -1,3 +1,24 @@
-table {
+#table {
+    margin-top: 20px;
+}
+.colIndex {
+    margin-bottom: 10px;
+}
+.cell {
+    display: inline-block;
+}
+.colIndex .cell-title, .cell {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-right: none;
+    line-height:50px;
+    text-align: center;
+}
+.colIndex .cell-title:last-child, .cell:last-child {
+    border-right: 1px solid #ccc;
+}
+input.add {
     margin-top: 20px;
 }
