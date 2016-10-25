@@ -1,2 +1,7 @@
-<div class="row-item" ng-transclude>
+<div class="row-item">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="rowIndex">{{$ctrl.indexRow}}</div><cell-item class="cells" ng-repeat="cellContent in $ctrl.cellsContent track by $index" cell-content="cellContent"></cell-item>
+        </div>
+    </div>
 </div>

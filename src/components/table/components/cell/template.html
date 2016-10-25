@@ -1,10 +1,1 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div class="colIndex">
-            <div class="cell-title" ng-repeat="titleItem in $ctrl.titleList">{{titleItem}}</div>
-        </div>
-        <div class="cells">
-            <input class="cell" type="text" name="text" value="{{cellContent}}" ng-repeat="cellContent in $ctrl.cellContent">
-        </div>
-    </div>
-</div>
+<input class="cell" type="text" name="text" ng-if="!$ctrl.prohibitEdit" value="{{$ctrl.cellContent}}"><div class="cell" ng-click="$ctrl.focus($event)" ng-dblclick="$ctrl.edit()" ng-if="$ctrl.prohibitEdit">{{$ctrl.cellContent}}</div>

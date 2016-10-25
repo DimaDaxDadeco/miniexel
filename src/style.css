@@ -1,11 +1,20 @@
 #table {
     margin-top: 20px;
 }
-.colIndex {
-    margin-bottom: 10px;
+.cells, .colIndex {
+    float: left;
 }
-.cell {
-    display: inline-block;
+.rowIndex {
+    float: left;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-right: none;
+    line-height:50px;
+    text-align: center;
+}
+.row-item {
+    margin-bottom: 10px;
 }
 .colIndex .cell-title, .cell {
     display: inline-block;
@@ -16,9 +25,12 @@
     line-height:50px;
     text-align: center;
 }
-.colIndex .cell-title:last-child, .cell:last-child {
+.colIndex .cell-title:last-child, .cells:last-child .cell {
     border-right: 1px solid #ccc;
 }
 input.add {
     margin-top: 20px;
+}
+.cell.focus {
+    background: #e6e6e6;
 }

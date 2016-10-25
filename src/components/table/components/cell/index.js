@@ -3,5 +3,8 @@ var template = require('./template.html');
 
 module.exports = {
     controller: controller,
-    template: template
+    template: template,
+    bindings: {
+        cellContent: "="
+    }
 }

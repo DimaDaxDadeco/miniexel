@@ -13,4 +13,8 @@ angular
         enabled: true,
         requireBase: false
     });
+}).run(function() {
+    if (!localStorage['tableContent']) {
+        localStorage['tableContent'] = JSON.stringify([["1", "2", "3"], ["", "", ""], ["", "", ""]]);
+    }
 });

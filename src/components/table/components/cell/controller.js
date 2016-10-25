@@ -1,21 +1,15 @@
-module.exports = function($scope, TableService) {
+module.exports = function() {
 
     var self = this;
 
-    self.titleName = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    self.prohibitEdit = true;
 
-    self.titleList = [];
-
-    TableService.cellContent.forEach(function(item, i) {
-        self.titleList.push(self.titleName[i]);
-    });
-
-    $scope.$watch(function() {
-        return TableService.cellContent;
-    }, function() {
-        self.cellContent = TableService.cellContent;
-        self.titleList.push(self.titleName[TableService.cellContent.length]);
-    });
-
-
+    self.focus = function(event) {
+        event.currentTarget.classList.toggle("focus");
+        console.log(event.currentTarget);
+        console.log(event.currentTarget.parentNode.parentNode.getElementsByClassName('cell')[0].classList);
+    };
+    self.edit = function() {
+        self.prohibitEdit = false;
+    };
 }

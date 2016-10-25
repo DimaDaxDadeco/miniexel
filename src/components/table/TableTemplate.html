@@ -1,8 +1,10 @@
 <div class="container">
     <div class="row">
-        <div id="table">
-            <row-item>
-                <cell-item></cell-item>
+        <div id="table" class="clearfix">
+            <div class="colIndex">
+                <div class="cell-title">№</div><div class="cell-title" ng-repeat="titleItem in $ctrl.titleList">{{titleItem}}</div>
+            </div>
+            <row-item ng-repeat="row in $ctrl.rows" cells-content="row" index-row="$index+1">
             </row-item>
         </div>
         <input type="submit" name="add-cell" value="Add cell" class="btn btn-default add" ng-click="$ctrl.addCell()">
