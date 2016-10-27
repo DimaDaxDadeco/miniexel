@@ -31,6 +31,23 @@
 input.add {
     margin-top: 20px;
 }
-.cell.focus {
+.cell.selected {
     background: #e6e6e6;
+}
+cell-item {
+    position: relative;
+}
+input.cell {
+    position: relative;
+    z-index: 2;
+}
+div.cell {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    background: #fff;
+}
+div.cell.back {
+    z-index: 1;
 }

@@ -1,7 +1,7 @@
 <div class="row-item">
     <div class="row">
         <div class="col-xs-12">
-            <div class="rowIndex">{{$ctrl.indexRow}}</div><cell-item class="cells" ng-repeat="cellContent in $ctrl.cellsContent track by $index" cell-content="cellContent"></cell-item>
+            <div class="rowIndex">{{$ctrl.indexRow}}</div><cell-item class="cells" ng-repeat="cellContent in $ctrl.cellsContent track by $index" cell-content="cellContent" index-row="$ctrl.indexRow-1" index-cell="$index"></cell-item>
         </div>
     </div>
 </div>

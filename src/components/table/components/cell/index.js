@@ -5,6 +5,8 @@ module.exports = {
     controller: controller,
     template: template,
     bindings: {
-        cellContent: "="
+        cellContent: "=",
+        indexRow: "=",
+        indexCell: "="
     }
 }
