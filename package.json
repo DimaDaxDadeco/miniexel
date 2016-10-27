@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "angular": "^1.5.8",
+    "angular-click-outside": "^1.2.0",
     "angular-local-storage": "^0.5.0",
     "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.7",

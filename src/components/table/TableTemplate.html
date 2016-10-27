@@ -7,7 +7,9 @@
             <row-item ng-repeat="row in $ctrl.rows" cells-content="row" index-row="$index+1">
             </row-item>
         </div>
-        <input type="submit" name="add-cell" value="Add cell" class="btn btn-default add" ng-click="$ctrl.addCell()">
-        <input type="submit" name="add-row" value="Add row" class="btn btn-default add" ng-click="$ctrl.addRow()">
+        <input type="submit" name="add-cell" value="Add cell" class="btn btn-default add-delete" ng-click="$ctrl.addCell()">
+        <input type="submit" name="add-row" value="Add row" class="btn btn-default add-delete" ng-click="$ctrl.addRow()">
+        <input type="submit" name="delete-row" value="Delete row" class="btn btn-default add-delete" ng-click="$ctrl.deleteRow()">
+        <input type="submit" name="delete-cell" value="Delete cell" class="btn btn-default add-delete" ng-click="$ctrl.deleteCell()">
     </div>
 </div>

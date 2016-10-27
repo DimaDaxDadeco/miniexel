@@ -2,12 +2,15 @@ var angular = require('angular');
 require("./components");
 require("angular-ui-router");
 require("angular-local-storage");
+require('angular-click-outside');
 
 angular
     .module("MiniExel", [
       'ui.router',
       'LocalStorageModule',
-      'table'
+      'table',
+      'tw.directives.clickOutside',
+      'services'
     ]).config(function($locationProvider) {
         $locationProvider.html5Mode({
         enabled: true,
