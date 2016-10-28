@@ -3,6 +3,7 @@ require("./components");
 require("angular-ui-router");
 require("angular-local-storage");
 require('angular-click-outside');
+require('ng-focus-if');
 
 angular
     .module("MiniExel", [
@@ -10,7 +11,8 @@ angular
       'LocalStorageModule',
       'table',
       'tw.directives.clickOutside',
-      'services'
+      'services',
+      'focus-if'
     ]).config(function($locationProvider) {
         $locationProvider.html5Mode({
         enabled: true,

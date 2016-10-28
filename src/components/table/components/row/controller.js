@@ -7,12 +7,12 @@ module.exports = function($scope, TableService) {
     $scope.$watch(function() {
         return TableService.cellsContent;
     }, function() {
-        if (TableService.indexCell > self.cellsContent.length) {
+        if (TableService.maxIndexCell > self.cellsContent.length) {
             TableService.titleListRemove(self.cellsContent.length);
             TableService.indexCellInc(-1);
         }
-        while(TableService.indexCell < self.cellsContent.length) {
-            TableService.titleListAdd(TableService.indexCell);
+        while(TableService.maxIndexCell < self.cellsContent.length) {
+            TableService.titleListAdd(TableService.maxIndexCell);
             TableService.indexCellInc(1);
         }
     });

@@ -1,4 +1,4 @@
-module.exports = function($scope, TableService) {
+module.exports = function($scope, TableService, KeyboardService) {
 
     var self = this;
 
@@ -52,4 +52,36 @@ module.exports = function($scope, TableService) {
             self.rows = JSON.parse(localStorage["tableContent"]);
         }
     };
+    var keyPressHandlers = {
+        left: function(position) {
+            if (TableService.position.indexCell) {
+                TableService.setPosition(TableService.position.indexRow, TableService.position.indexCell - 1);
+            }
+        },
+        up: function() {
+            if (TableService.position.indexRow) {
+                TableService.setPosition(TableService.position.indexRow - 1, TableService.position.indexCell);
+            }
+        },
+        right: function() {
+            if (TableService.position.indexCell < TableService.maxIndexCell - 1) {
+                TableService.setPosition(TableService.position.indexRow, TableService.position.indexCell + 1);
+            }
+        },
+        down: function() {
+            if(TableService.position.indexRow < TableService.cellsContent.length - 1) {
+                TableService.setPosition(TableService.position.indexRow + 1, TableService.position.indexCell);
+            }
+        },
+        enter: function() {}
+    };
+    self.move = function(key) {
+        $scope.$apply(function() {
+            keyPressHandlers[key]();
+        });
+    };
+    KeyboardService.init();
+    KeyboardService.on(function(key) {
+        self.move(key);
+    });
 }

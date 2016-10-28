@@ -1,8 +1,8 @@
-module.exports = function TableService($document, KeyboardService) {
+module.exports = function TableService() {
 
     var self = this;
     self.titleList = [];
-    self.indexCell = 0;
+    self.maxIndexCell = 0;
 
     self.cellsContent = JSON.parse(localStorage['tableContent']);
 
@@ -13,24 +13,13 @@ module.exports = function TableService($document, KeyboardService) {
         self.titleList.splice(indexCell, 1)
     };
     self.indexCellInc = function(num) {
-        self.indexCell += num;
+        self.maxIndexCell += num;
     };
     self.setPosition = function(indexRow, indexCell) {
         self.position = {
             indexRow: indexRow,
             indexCell: indexCell,
         };
-    };
-    self.move = function(key) {
-        if(key == 'left') {
-            self.setPosition(self.position.indexRow, self.position.indexCell - 1);
-        } else if (key == 'up') {
-            self.setPosition(self.position.indexRow - 1, self.position.indexCell);
-        } else if (key == 'right') {
-            self.setPosition(self.position.indexRow, self.position.indexCell + 1);
-        } else if (key == 'down') {
-            self.setPosition(self.position.indexRow + 1, self.position.indexCell);
-        }
     };
     self.letters = function(number) {
         const base = "A".charCodeAt( 0 ) - 1;
@@ -43,8 +32,4 @@ module.exports = function TableService($document, KeyboardService) {
         orderLetters.unshift(String.fromCharCode(base + Math.floor(number)));
         return orderLetters.join("");
     }
-    KeyboardService.init();
-    KeyboardService.on(function(key) {
-        self.move(key);
-    });
 }

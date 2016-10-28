@@ -1,30 +1,11 @@
-module.exports = function($scope, TableService) {
+module.exports = function($scope, TableService, KeyboardService) {
 
     var self = this;
 
     self.solveEdit = false;
 
-    self.selected = function(event) {
-
+    self.setPosition = function(event) {
         TableService.setPosition(self.indexRow, self.indexCell);
-
-        var node = event.currentTarget.parentNode;
-
-        while (node.id != "table") {
-            node = node.parentNode;
-        }
-
-        var cells = node.getElementsByClassName('cell'),
-            cellsLength = cells.length;
-
-        event.currentTarget.classList.toggle("selected");
-        // cells[TableService.position.indexCell + TableService.indexCell * TableService.position.indexRow].style.background = 'red';
-
-        for (var i = 0; i < cellsLength; i++) {
-            if (cells[i].classList != event.currentTarget.classList) {
-                cells[i].classList.remove('selected');
-            }
-        }
     };
     self.edit = function() {
         self.solveEdit = true;
@@ -39,8 +20,19 @@ module.exports = function($scope, TableService) {
 
         self.solveEdit = false;
     };
+    KeyboardService.on(function(key) {
+        $scope.$apply(function() {
+            if (key === "enter" && self.selected) {
+                self.solveEdit = true;
+            }
+        })
+    });
     $scope.$watch(function() {
         return TableService.position;
     }, function() {
+        var position = TableService.position;
+        if (position) {
+            self.selected = position.indexRow === self.indexRow && position.indexCell === self.indexCell;
+        }
     });
 }

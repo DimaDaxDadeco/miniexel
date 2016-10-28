@@ -1,11 +1,13 @@
 module.exports = function KeyboardService($document) {
 
-    var UP    = 'up',
+    var ENTER = 'enter',
+        UP    = 'up',
         RIGHT = 'right',
         DOWN  = 'down',
         LEFT  = 'left';
 
     var keyboardMap = {
+        13: ENTER,
         37: LEFT,
         38: UP,
         39: RIGHT,
