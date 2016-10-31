@@ -32,4 +32,5 @@ module.exports = function TableService() {
         orderLetters.unshift(String.fromCharCode(base + Math.floor(number)));
         return orderLetters.join("");
     }
+    self.setPosition(0,0);
 }

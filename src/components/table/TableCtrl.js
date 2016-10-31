@@ -53,7 +53,7 @@ module.exports = function($scope, TableService, KeyboardService) {
         }
     };
     var keyPressHandlers = {
-        left: function(position) {
+        left: function() {
             if (TableService.position.indexCell) {
                 TableService.setPosition(TableService.position.indexRow, TableService.position.indexCell - 1);
             }
@@ -69,7 +69,7 @@ module.exports = function($scope, TableService, KeyboardService) {
             }
         },
         down: function() {
-            if(TableService.position.indexRow < TableService.cellsContent.length - 1) {
+            if(TableService.position.indexRow < self.rows.length - 1) {
                 TableService.setPosition(TableService.position.indexRow + 1, TableService.position.indexCell);
             }
         },

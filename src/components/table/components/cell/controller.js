@@ -3,8 +3,9 @@ module.exports = function($scope, TableService, KeyboardService) {
     var self = this;
 
     self.solveEdit = false;
+    self.keyboardServiceOff = true;
 
-    self.setPosition = function(event) {
+    self.setPosition = function() {
         TableService.setPosition(self.indexRow, self.indexCell);
     };
     self.edit = function() {
@@ -19,13 +20,15 @@ module.exports = function($scope, TableService, KeyboardService) {
         TableService.cellsContent = cellsContent;
 
         self.solveEdit = false;
+        self.keyboardServiceOff = false;
     };
     KeyboardService.on(function(key) {
         $scope.$apply(function() {
-            if (key === "enter" && self.selected) {
+            if (key === "enter" && self.selected && self.keyboardServiceOff) {
                 self.solveEdit = true;
             }
-        })
+            self.keyboardServiceOff = true;
+        });
     });
     $scope.$watch(function() {
         return TableService.position;
