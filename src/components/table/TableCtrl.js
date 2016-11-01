@@ -1,23 +1,23 @@
-export default class {
+export default class TableCtrl {
 
     keyPressHandlers = {
         left: () => {
-            if (this.TableService.position.indexCell) {
+            if (this.canMove("left")) {
                 this.TableService.setPosition(this.TableService.position.indexRow, this.TableService.position.indexCell - 1);
             }
         },
         up: () => {
-            if (this.TableService.position.indexRow) {
+            if (this.canMove("up")) {
                 this.TableService.setPosition(this.TableService.position.indexRow - 1, this.TableService.position.indexCell);
             }
         },
         right: () => {
-            if (this.TableService.position.indexCell < this.TableService.maxIndexCell - 1) {
+            if (this.canMove("right")) {
                 this.TableService.setPosition(this.TableService.position.indexRow, this.TableService.position.indexCell + 1);
             }
         },
         down: () => {
-            if (this.TableService.position.indexRow < this.rows.length - 1) {
+            if (this.canMove("down")) {
                 this.TableService.setPosition(this.TableService.position.indexRow + 1, this.TableService.position.indexCell);
             }
         }
@@ -45,8 +45,8 @@ export default class {
         const numCell = Number(prompt("Enter the cell number that you want to add", ""));
         if (numCell) {
             const tableContent = JSON.parse(localStorage.tableContent);
-            tableContent.forEach(item => {
-                item.splice(numCell - 1, 0, "");
+            tableContent.forEach(row => {
+                row.splice(numCell - 1, 0, "");
             });
             localStorage.tableContent = JSON.stringify(tableContent);
             this.TableService.cellsContent = tableContent;
@@ -56,16 +56,19 @@ export default class {
 
     deleteCell() {
         const numCell = Number(prompt("Enter the cell number that you want to delete", ""));
-        if (numCell) {
-            const tableContent = JSON.parse(localStorage.tableContent);
-            tableContent.forEach(item => {
-                item.splice(numCell - 1, 1);
+        const tableContent = JSON.parse(localStorage.tableContent);
+        if (numCell <= tableContent[0].length && numCell > 0) {
+            tableContent.forEach(row => {
+                row.splice(numCell - 1, 1);
             });
             localStorage.tableContent = JSON.stringify(tableContent);
             this.TableService.cellsContent = tableContent;
             this.rows = JSON.parse(localStorage.tableContent);
+        } else {
+            alert("Такой колонки нет:)");
         }
     }
+
     addRow() {
         const numRow = Number(prompt("Enter the row number that you want to add", ""));
         if (numRow) {
@@ -80,18 +83,38 @@ export default class {
             this.rows = JSON.parse(localStorage.tableContent);
         }
     }
+
     deleteRow() {
         const numRow = Number(prompt("Enter the row number that you want to delete", ""));
-        if (numRow) {
-            const tableContent = JSON.parse(localStorage.tableContent);
+        const tableContent = JSON.parse(localStorage.tableContent);
+        if (numRow <= tableContent.length && numRow > 0) {
             tableContent.splice(numRow - 1, 1);
             localStorage.tableContent = JSON.stringify(tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
+        } else {
+            alert("Такого ряда нет:)");
         }
     }
+
     move(key) {
         this.scope.$apply(() => {
             this.keyPressHandlers[key]();
         });
+    }
+
+    canMove(direction) {
+        const { indexRow, indexCell } = this.TableService.position;
+        switch (direction) {
+            case "left":
+                return indexCell;
+            case "right":
+                return indexCell < this.TableService.maxIndexCell - 1;
+            case "up":
+                return indexRow;
+            case "down":
+                return indexRow < this.rows.length - 1;
+            default:
+                return false;
+        }
     }
 }

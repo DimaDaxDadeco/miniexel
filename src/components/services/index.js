@@ -5,4 +5,4 @@ import LettersGeneratorFactory from "./letters-generator/LettersGeneratorFactory
 angular
     .module("services", [])
     .service("KeyboardService", KeyboardService)
-    .factory("LettersGenerator", LettersGeneratorFactory);
+    .factory("lettersGenerator", LettersGeneratorFactory);

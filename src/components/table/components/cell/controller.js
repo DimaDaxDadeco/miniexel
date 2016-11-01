@@ -8,16 +8,16 @@ export default class {
     }
 
     init() {
-        this.solveEdit = false;
+        this.editingEnabled = false;
         this.keyboardServiceOff = true;
 
         this.KeyboardService.on(key => {
-            this.scope.$apply(() => {
-                if (key === "enter" && this.selected && this.keyboardServiceOff) {
-                    this.solveEdit = true;
-                }
-                this.keyboardServiceOff = true;
-            });
+            if (key === "enter" && this.selected && this.keyboardServiceOff) {
+                this.scope.$apply(() => {
+                    this.editingEnabled = true;
+                });
+            }
+            this.keyboardServiceOff = true;
         });
 
         this.scope.$watch(() => this.TableService.position, () => {
@@ -28,12 +28,12 @@ export default class {
         });
     }
 
-    setPosition() {
+    selectCell() {
         this.TableService.setPosition(this.indexRow, this.indexCell);
     }
 
     edit() {
-        this.solveEdit = true;
+        this.editingEnabled = true;
     }
 
     save() {
@@ -43,7 +43,7 @@ export default class {
         localStorage.tableContent = JSON.stringify(cellsContent);
         this.TableService.cellsContent = cellsContent;
 
-        this.solveEdit = false;
+        this.editingEnabled = false;
         this.keyboardServiceOff = false;
     }
 }

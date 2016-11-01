@@ -1,2 +1,17 @@
-<input class="cell" type="text" name="text" ng-if="$ctrl.solveEdit" ng-keydown="($event.keyCode === 13 || $event.keyCode === 37 || $event.keyCode === 38 || $event.keyCode === 39 || $event.keyCode === 40) && $ctrl.save()" ng-model="$ctrl.cellContent" tw-click-outside="$ctrl.save()" focus-if="$ctrl.solveEdit">
-<span class="cell" ng-if="!$ctrl.solveEdit" ng-click="$ctrl.setPosition($event)" ng-dblclick="$ctrl.edit()" ng-class="{'selected': $ctrl.selected}">{{$ctrl.cellContent}}</span>
+<input class="cell"
+    type="text"
+    name="text"
+    ng-if="$ctrl.editingEnabled"
+    ng-keydown="($event.keyCode === 13 || $event.keyCode === 37 || $event.keyCode === 38 || $event.keyCode === 39 || $event.keyCode === 40) && $ctrl.save()"
+    ng-model="$ctrl.cellContent"
+    tw-click-outside="$ctrl.save()"
+    focus-if="$ctrl.editingEnabled"
+>
+<span class="cell"
+    ng-if="!$ctrl.editingEnabled"
+    ng-click="$ctrl.selectCell()"
+    ng-dblclick="$ctrl.edit()"
+    ng-class="{'selected': $ctrl.selected}"
+>
+    {{$ctrl.cellContent}}
+</span>
