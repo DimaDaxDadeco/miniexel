@@ -1,19 +1,22 @@
-module.exports = function($scope, TableService) {
+export default class {
 
-    var self = this;
+    constructor($scope, TableService) {
+        this.scope = $scope;
+        this.TableService = TableService;
+        this.init();
+    }
 
-    self.titleList = [];
-
-    $scope.$watch(function() {
-        return TableService.cellsContent;
-    }, function() {
-        if (TableService.maxIndexCell > self.cellsContent.length) {
-            TableService.titleListRemove(self.cellsContent.length);
-            TableService.indexCellInc(-1);
-        }
-        while(TableService.maxIndexCell < self.cellsContent.length) {
-            TableService.titleListAdd(TableService.maxIndexCell);
-            TableService.indexCellInc(1);
-        }
-    });
+    init() {
+        this.titleList = [];
+        this.scope.$watch(() => this.TableService.cellsContent, () => {
+            if (this.TableService.maxIndexCell > this.cellsContent.length) {
+                this.TableService.titleListRemove(this.cellsContent.length);
+                this.TableService.indexCellInc(-1);
+            }
+            while (this.TableService.maxIndexCell < this.cellsContent.length) {
+                this.TableService.titleListAdd(this.TableService.maxIndexCell);
+                this.TableService.indexCellInc(1);
+            }
+        });
+    }
 }

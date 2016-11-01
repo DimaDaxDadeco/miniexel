@@ -1,25 +1,25 @@
-var angular = require('angular');
-require("./components");
-require("angular-ui-router");
-require("angular-local-storage");
-require('angular-click-outside');
-require('ng-focus-if');
+import angular from "angular";
+import "./components";
+import "angular-ui-router";
+import "angular-local-storage";
+import "angular-click-outside";
+import "ng-focus-if";
 
 angular
     .module("MiniExel", [
-      'ui.router',
-      'LocalStorageModule',
-      'table',
-      'tw.directives.clickOutside',
-      'services',
-      'focus-if'
-    ]).config(function($locationProvider) {
+      "ui.router",
+      "LocalStorageModule",
+      "table",
+      "tw.directives.clickOutside",
+      "services",
+      "focus-if"
+    ]).config($locationProvider => {
         $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
     });
-}).run(function() {
-    if (!localStorage['tableContent']) {
-        localStorage['tableContent'] = JSON.stringify([["1", "2", "3"], ["", "", ""], ["", "", ""]]);
+}).run(() => {
+    if (!localStorage.tableContent) {
+        localStorage.tableContent = JSON.stringify([["1", "2", "3"], ["", "", ""], ["", "", ""]]);
     }
 });

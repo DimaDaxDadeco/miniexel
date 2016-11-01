@@ -5,6 +5,7 @@
     float: left;
 }
 .rowIndex {
+    display: block;
     float: left;
     height: 50px;
     width: 50px;
@@ -17,7 +18,8 @@
     margin-bottom: 10px;
 }
 .colIndex .cell-title, .cell {
-    display: inline-block;
+    display: block;
+    float: left;
     height: 50px;
     width: 50px;
     border: 1px solid #ccc;
@@ -25,10 +27,10 @@
     line-height:50px;
     text-align: center;
 }
-.colIndex .cell-title:last-child, .cells:last-child .cell {
+title-cell:last-child .cell-title, .cells:last-child .cell {
     border-right: 1px solid #ccc;
 }
-input.add-delete {
+button.add-delete {
     margin-top: 20px;
 }
 .cell.selected {

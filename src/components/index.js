@@ -1,2 +1,2 @@
-require('./table');
-require('./services');
+import "./table";
+import "./services";

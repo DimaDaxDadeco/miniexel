@@ -1,49 +1,45 @@
-module.exports = function KeyboardService($document) {
+export default class KeyboardService {
 
-    var ENTER = 'enter',
-        UP    = 'up',
-        RIGHT = 'right',
-        DOWN  = 'down',
-        LEFT  = 'left';
-
-    var keyboardMap = {
-        13: ENTER,
-        37: LEFT,
-        38: UP,
-        39: RIGHT,
-        40: DOWN
+    keyboardMap = {
+        13: "enter",
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down"
     };
 
-    this.init = function() {
-        var self = this;
+    constructor($document) {
+        this.document = $document;
+    }
+
+    init() {
         this.keyEventHandlers = [];
-        $document.bind('keydown', function(evt) {
-            var key = keyboardMap[evt.which];
+        this.document.bind("keydown", (evt) => {
+            const key = this.keyboardMap[evt.which];
 
             if (key) {
                 evt.preventDefault();
-                self._handleKeyEvent(key, evt);
+                this._handleKeyEvent(key, evt);
             }
         });
-    };
+    }
 
-    this.on = function(cb) {
+    on(cb) {
         this.keyEventHandlers.push(cb);
-    };
+    }
 
-    this._handleKeyEvent = function(key, evt) {
-        var callbacks = this.keyEventHandlers;
-            if (!callbacks) {
-                return;
-            }
-
-        evt.preventDefault();
+    _handleKeyEvent(key, evt) {
+        const callbacks = this.keyEventHandlers;
+        if (!callbacks) {
+            return;
+        }
 
         if (callbacks) {
-            for (var x = 0; x < callbacks.length; x++) {
-                var cb = callbacks[x];
+            callbacks.forEach(item => {
+                const cb = item;
                 cb(key, evt);
-            }
+            });
         }
-    };
+    }
 }
+

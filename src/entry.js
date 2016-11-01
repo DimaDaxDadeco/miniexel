@@ -1,3 +1,3 @@
-require("./");
-require("bootstrap-css");
-require("./style.css");
+import "./";
+import "bootstrap-css";
+import "./style.css";

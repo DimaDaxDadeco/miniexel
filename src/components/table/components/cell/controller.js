@@ -1,41 +1,49 @@
-module.exports = function($scope, TableService, KeyboardService) {
+export default class {
 
-    var self = this;
+    constructor($scope, TableService, KeyboardService) {
+        this.scope = $scope;
+        this.TableService = TableService;
+        this.KeyboardService = KeyboardService;
+        this.init();
+    }
 
-    self.solveEdit = false;
-    self.keyboardServiceOff = true;
+    init() {
+        this.solveEdit = false;
+        this.keyboardServiceOff = true;
 
-    self.setPosition = function() {
-        TableService.setPosition(self.indexRow, self.indexCell);
-    };
-    self.edit = function() {
-        self.solveEdit = true;
-    };
-    self.save = function() {
-
-        var cellsContent = JSON.parse(localStorage['tableContent']);
-
-        cellsContent[TableService.position.indexRow][TableService.position.indexCell] = this.cellContent;
-        localStorage['tableContent'] = JSON.stringify(cellsContent);
-        TableService.cellsContent = cellsContent;
-
-        self.solveEdit = false;
-        self.keyboardServiceOff = false;
-    };
-    KeyboardService.on(function(key) {
-        $scope.$apply(function() {
-            if (key === "enter" && self.selected && self.keyboardServiceOff) {
-                self.solveEdit = true;
-            }
-            self.keyboardServiceOff = true;
+        this.KeyboardService.on(key => {
+            this.scope.$apply(() => {
+                if (key === "enter" && this.selected && this.keyboardServiceOff) {
+                    this.solveEdit = true;
+                }
+                this.keyboardServiceOff = true;
+            });
         });
-    });
-    $scope.$watch(function() {
-        return TableService.position;
-    }, function() {
-        var position = TableService.position;
-        if (position) {
-            self.selected = position.indexRow === self.indexRow && position.indexCell === self.indexCell;
-        }
-    });
+
+        this.scope.$watch(() => this.TableService.position, () => {
+            const position = this.TableService.position;
+            if (position) {
+                this.selected = position.indexRow === this.indexRow && position.indexCell === this.indexCell;
+            }
+        });
+    }
+
+    setPosition() {
+        this.TableService.setPosition(this.indexRow, this.indexCell);
+    }
+
+    edit() {
+        this.solveEdit = true;
+    }
+
+    save() {
+        const cellsContent = JSON.parse(localStorage.tableContent);
+
+        cellsContent[this.TableService.position.indexRow][this.TableService.position.indexCell] = this.cellContent;
+        localStorage.tableContent = JSON.stringify(cellsContent);
+        this.TableService.cellsContent = cellsContent;
+
+        this.solveEdit = false;
+        this.keyboardServiceOff = false;
+    }
 }

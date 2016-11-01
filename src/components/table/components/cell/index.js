@@ -1,12 +1,12 @@
-var controller = require('./controller');
-var template = require('./template.html');
+import controller from "./controller";
+import template from "./template.html";
 
-module.exports = {
-    controller: controller,
-    template: template,
+export default {
+    controller,
+    template,
     bindings: {
         cellContent: "=",
         indexRow: "=",
         indexCell: "="
     }
-}
+};

@@ -1,6 +1,8 @@
-var angular = require('angular');
-var KeyboardService = require('./keyboard/KeyboardService');
+import angular from "angular";
+import KeyboardService from "./keyboard/KeyboardService";
+import LettersGeneratorFactory from "./letters-generator/LettersGeneratorFactory";
 
 angular
-    .module('services', [])
-    .service('KeyboardService', KeyboardService);
+    .module("services", [])
+    .service("KeyboardService", KeyboardService)
+    .factory("LettersGenerator", LettersGeneratorFactory);

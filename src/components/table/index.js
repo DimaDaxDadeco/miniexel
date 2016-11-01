@@ -1,21 +1,23 @@
-var angular = require('angular');
-var TableService = require('./TableService');
-var TableCtrl = require('./TableCtrl');
-var TableTemplate = require('./TableTemplate.html');
-var RowComponent = require('./components/row');
-var CellComponent = require('./components/cell');
+import angular from "angular";
+import TableService from "./TableService";
+import TableCtrl from "./TableCtrl";
+import TableTemplate from "./TableTemplate.html";
+import RowComponent from "./components/row";
+import CellComponent from "./components/cell";
+import TitleCellComponent from "./components/title-cell";
 
-angular.module('table', [])
-    .service('TableService', TableService)
-    .config(function($stateProvider) {
+angular.module("table", [])
+    .service("TableService", TableService)
+    .config($stateProvider => {
         $stateProvider
-            .state('table', {
+            .state("table", {
                 url: "/",
                 template: TableTemplate,
                 controller: TableCtrl,
-                controllerAs: '$ctrl'
+                controllerAs: "$ctrl"
             });
     })
-    .service('TableService', TableService)
-    .component('rowItem', RowComponent)
-    .component('cellItem', CellComponent);
+    .service("TableService", TableService)
+    .component("rowItem", RowComponent)
+    .component("cellItem", CellComponent)
+    .component("titleCell", TitleCellComponent);

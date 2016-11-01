@@ -1,28 +1,33 @@
-module.exports = function TableService() {
+export default class TableService {
 
-    var self = this;
-    self.titleList = [];
-    self.maxIndexCell = 0;
+    constructor() {
+        this.titleList = [];
+        this.maxIndexCell = 0;
+        this.cellsContent = JSON.parse(localStorage.tableContent);
+        this.setPosition(0, 0);
+    }
 
-    self.cellsContent = JSON.parse(localStorage['tableContent']);
+    titleListAdd(indexCell) {
+        this.titleList.push(this.letters([indexCell + 1]));
+    }
 
-    self.titleListAdd = function(indexCell) {
-        self.titleList.push(self.letters([indexCell+1]));
-    };
-    self.titleListRemove = function(indexCell) {
-        self.titleList.splice(indexCell, 1)
-    };
-    self.indexCellInc = function(num) {
-        self.maxIndexCell += num;
-    };
-    self.setPosition = function(indexRow, indexCell) {
-        self.position = {
-            indexRow: indexRow,
-            indexCell: indexCell,
+    titleListRemove(indexCell) {
+        this.titleList.splice(indexCell, 1);
+    }
+
+    indexCellInc(num) {
+        this.maxIndexCell += num;
+    }
+
+    setPosition(indexRow, indexCell) {
+        this.position = {
+            indexRow,
+            indexCell
         };
-    };
-    self.letters = function(number) {
-        const base = "A".charCodeAt( 0 ) - 1;
+    }
+
+    letters(number) {
+        const base = "A".charCodeAt(0) - 1;
         const charAmount = 26;
         const orderLetters = [];
         while (number > charAmount) {
@@ -32,5 +37,4 @@ module.exports = function TableService() {
         orderLetters.unshift(String.fromCharCode(base + Math.floor(number)));
         return orderLetters.join("");
     }
-    self.setPosition(0,0);
 }
