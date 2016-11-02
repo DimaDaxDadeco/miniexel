@@ -22,6 +22,7 @@ export default class TableCtrl {
             }
         }
     };
+    tableContent = JSON.parse(localStorage.tableContent);
 
     constructor($scope, TableService, KeyboardService) {
         this.scope = $scope;
@@ -39,30 +40,36 @@ export default class TableCtrl {
                 this.move(key);
             }
         });
+        this.scope.$watch(() => this.TableService.cellsContent, () => {
+            if (this.TableService.maxIndexCell > this.rows[0].length) {
+                this.TableService.titleListRemove(this.rows[0].length);
+                this.TableService.indexCellInc(-1);
+            }
+            while (this.TableService.maxIndexCell < this.rows[0].length) {
+                this.TableService.titleListAdd(this.TableService.maxIndexCell);
+                this.TableService.indexCellInc(1);
+            }
+        });
     }
 
     addCell() {
         const numCell = Number(prompt("Enter the cell number that you want to add", ""));
         if (numCell) {
-            const tableContent = JSON.parse(localStorage.tableContent);
-            tableContent.forEach(row => {
+            this.tableContent.forEach(row => {
                 row.splice(numCell - 1, 0, "");
             });
-            localStorage.tableContent = JSON.stringify(tableContent);
-            this.TableService.cellsContent = tableContent;
+            this.TableService.saveTableData(this.tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
         }
     }
 
     deleteCell() {
         const numCell = Number(prompt("Enter the cell number that you want to delete", ""));
-        const tableContent = JSON.parse(localStorage.tableContent);
-        if (numCell <= tableContent[0].length && numCell > 0) {
-            tableContent.forEach(row => {
+        if (numCell <= this.tableContent[0].length && numCell > 0) {
+            this.tableContent.forEach(row => {
                 row.splice(numCell - 1, 1);
             });
-            localStorage.tableContent = JSON.stringify(tableContent);
-            this.TableService.cellsContent = tableContent;
+            this.TableService.saveTableData(this.tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
         } else {
             alert("Такой колонки нет:)");
@@ -72,24 +79,22 @@ export default class TableCtrl {
     addRow() {
         const numRow = Number(prompt("Enter the row number that you want to add", ""));
         if (numRow) {
-            const tableContent = JSON.parse(localStorage.tableContent);
-            const length = tableContent[0].length;
+            const length = this.tableContent[0].length;
             const emptyArray = [];
             for (let i = 0; i < length; i++) {
                 emptyArray[i] = "";
             }
-            tableContent.splice(numRow - 1, 0, emptyArray);
-            localStorage.tableContent = JSON.stringify(tableContent);
+            this.tableContent.splice(numRow - 1, 0, emptyArray);
+            this.TableService.saveTableData(this.tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
         }
     }
 
     deleteRow() {
         const numRow = Number(prompt("Enter the row number that you want to delete", ""));
-        const tableContent = JSON.parse(localStorage.tableContent);
-        if (numRow <= tableContent.length && numRow > 0) {
-            tableContent.splice(numRow - 1, 1);
-            localStorage.tableContent = JSON.stringify(tableContent);
+        if (numRow <= this.tableContent.length && numRow > 0) {
+            this.tableContent.splice(numRow - 1, 1);
+            this.TableService.saveTableData(this.tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
         } else {
             alert("Такого ряда нет:)");

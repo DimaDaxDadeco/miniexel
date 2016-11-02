@@ -1,13 +1,12 @@
 export default class {
 
-    constructor($scope, TableService) {
+    /*constructor($scope, TableService) {
         this.scope = $scope;
         this.TableService = TableService;
         this.init();
     }
 
     init() {
-        this.titleList = [];
         this.scope.$watch(() => this.TableService.cellsContent, () => {
             if (this.TableService.maxIndexCell > this.cellsContent.length) {
                 this.TableService.titleListRemove(this.cellsContent.length);
@@ -18,5 +17,5 @@ export default class {
                 this.TableService.indexCellInc(1);
             }
         });
-    }
+    }*/
 }

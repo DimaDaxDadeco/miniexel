@@ -30,4 +30,9 @@ export default class TableService {
             indexCell
         };
     }
+
+    saveTableData(tableContent) {
+        localStorage.tableContent = JSON.stringify(tableContent);
+        this.cellsContent = tableContent;
+    }
 }

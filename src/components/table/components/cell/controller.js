@@ -40,8 +40,7 @@ export default class {
         const cellsContent = JSON.parse(localStorage.tableContent);
 
         cellsContent[this.TableService.position.indexRow][this.TableService.position.indexCell] = this.cellContent;
-        localStorage.tableContent = JSON.stringify(cellsContent);
-        this.TableService.cellsContent = cellsContent;
+        this.TableService.saveTableData(cellsContent);
 
         this.editingEnabled = false;
         this.keyboardServiceOff = false;
