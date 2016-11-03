@@ -1,20 +1,21 @@
-export default class {
+export default class CellCtrl {
 
-    constructor($scope, TableService, KeyboardService) {
+    constructor($scope, TableService, KeyboardService, ContextMenuService) {
         this.scope = $scope;
         this.TableService = TableService;
         this.KeyboardService = KeyboardService;
+        this.ContextMenuService = ContextMenuService;
         this.init();
     }
 
     init() {
-        this.editingEnabled = false;
+        this.editing = false;
         this.keyboardServiceOff = true;
 
         this.KeyboardService.on(key => {
             if (key === "enter" && this.selected && this.keyboardServiceOff) {
                 this.scope.$apply(() => {
-                    this.editingEnabled = true;
+                    this.toggleEdit();
                 });
             }
             this.keyboardServiceOff = true;
@@ -23,17 +24,22 @@ export default class {
         this.scope.$watch(() => this.TableService.position, () => {
             const position = this.TableService.position;
             if (position) {
-                this.selected = position.indexRow === this.indexRow && position.indexCell === this.indexCell;
+                this.selected = position.indexRow === this.position.indexRow && position.indexCell === this.position.indexCell;
             }
         });
     }
 
-    selectCell() {
-        this.TableService.setPosition(this.indexRow, this.indexCell);
+    selectCell(show) {
+        this.TableService.setPosition(this.position.indexRow, this.position.indexCell);
+        this.ContextMenuService.toggleContextMenu(show);
     }
 
-    edit() {
-        this.editingEnabled = true;
+    toggleEdit() {
+        this.editing = !this.editing;
+    }
+
+    toggleContextMenu(event, show) {
+        this.ContextMenuService.toggleContextMenu(show, event, this.position);
     }
 
     save() {
@@ -42,7 +48,11 @@ export default class {
         cellsContent[this.TableService.position.indexRow][this.TableService.position.indexCell] = this.cellContent;
         this.TableService.saveTableData(cellsContent);
 
-        this.editingEnabled = false;
+        this.toggleEdit();
         this.keyboardServiceOff = false;
+    }
+
+    checkKeystroke(e) {
+        return [13, 37, 38, 39, 40].includes(e.keyCode);
     }
 }

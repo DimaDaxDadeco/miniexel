@@ -9,6 +9,7 @@ export default class TableService {
         this.titleList = [];
         this.maxIndexCell = 0;
         this.cellsContent = JSON.parse(localStorage.tableContent);
+        this.rows = JSON.parse(localStorage.tableContent);
         this.setPosition(0, 0);
     }
 
@@ -33,6 +34,7 @@ export default class TableService {
 
     saveTableData(tableContent) {
         localStorage.tableContent = JSON.stringify(tableContent);
-        this.cellsContent = tableContent;
+        this.cellsContent = [...tableContent];
+        this.rows = JSON.parse(localStorage.tableContent);
     }
 }

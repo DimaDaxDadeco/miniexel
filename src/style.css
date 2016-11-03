@@ -1,3 +1,7 @@
+ul {
+    padding: 0;
+    margin: 0;
+}
 #table {
     margin-top: 20px;
 }
@@ -30,9 +34,25 @@
 title-cell:last-child .cell-title, .cells:last-child .cell {
     border-right: 1px solid #ccc;
 }
+cell-item {
+    position: relative;
+}
 button.add-delete {
     margin-top: 20px;
 }
 .cell.selected {
     background: #e6e6e6;
+}
+#context-menu {
+    position: absolute;
+    padding: 5px;
+    z-index: 99;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#context-menu ul {
+    list-style: none;
+}
+#context-menu ul li button {
+    width: 145px;
 }

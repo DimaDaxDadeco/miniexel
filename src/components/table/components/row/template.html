@@ -5,8 +5,7 @@
                 <cell-item class="cells"
                     ng-repeat="cellContent in $ctrl.cellsContent track by $index"
                     cell-content="cellContent"
-                    index-row="$ctrl.indexRow-1"
-                    index-cell="$index"
+                    position="{ indexRow: $ctrl.indexRow - 1, indexCell: $index }"
                 >
                 </cell-item>
         </div>

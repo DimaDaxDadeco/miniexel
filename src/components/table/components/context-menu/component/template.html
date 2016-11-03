@@ -1,0 +1,10 @@
+<div id="context-menu" ng-style="$ctrl.coordinates">
+    <ul>
+        <li><button type="button" name="add column before" class="btn btn-default" ng-click="$ctrl.addColumn('before', false)">add column before</button></li>
+        <li><button type="button" name="add column after" class="btn btn-default" ng-click="$ctrl.addColumn('after', false)">add column after</button></li>
+        <li><button type="button" name="add row before" class="btn btn-default" ng-click="$ctrl.addRow('before', false)">add row before</button></li>
+        <li><button type="button" name="add row after" class="btn btn-default" ng-click="$ctrl.addRow('after', false)">add row after</button></li>
+        <li><button type="button" name="delete row" class="btn btn-default" ng-click="$ctrl.deleteRow(false)">delete row</button></li>
+        <li><button type="button" name="delete column" class="btn btn-default" ng-click="$ctrl.deleteColumn(false)">delete column</button></li>
+    </ul>
+</div>

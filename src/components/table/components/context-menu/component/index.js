@@ -3,9 +3,5 @@ import template from "./template.html";
 
 export default {
     controller,
-    template,
-    bindings: {
-        cellContent: "=",
-        position: "="
-    }
+    template
 };

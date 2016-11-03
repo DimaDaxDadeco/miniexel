@@ -24,10 +24,11 @@ export default class TableCtrl {
     };
     tableContent = JSON.parse(localStorage.tableContent);
 
-    constructor($scope, TableService, KeyboardService) {
+    constructor($scope, TableService, KeyboardService, ContextMenuService) {
         this.scope = $scope;
         this.TableService = TableService;
         this.KeyboardService = KeyboardService;
+        this.ContextMenuService = ContextMenuService;
         this.init();
     }
 
@@ -41,18 +42,22 @@ export default class TableCtrl {
             }
         });
         this.scope.$watch(() => this.TableService.cellsContent, () => {
-            if (this.TableService.maxIndexCell > this.rows[0].length) {
-                this.TableService.titleListRemove(this.rows[0].length);
+            if (this.TableService.maxIndexCell > this.TableService.rows[0].length) {
+                this.TableService.titleListRemove(this.TableService.rows[0].length);
                 this.TableService.indexCellInc(-1);
             }
-            while (this.TableService.maxIndexCell < this.rows[0].length) {
+            while (this.TableService.maxIndexCell < this.TableService.rows[0].length) {
                 this.TableService.titleListAdd(this.TableService.maxIndexCell);
                 this.TableService.indexCellInc(1);
             }
         });
+        this.scope.$watch(() => this.ContextMenuService.contextMenu, () => {
+            this.contextMenu = this.ContextMenuService.contextMenu;
+            this.rows = this.TableService.rows;
+        });
     }
 
-    addCell() {
+    /*addColumn() {
         const numCell = Number(prompt("Enter the cell number that you want to add", ""));
         if (numCell) {
             this.tableContent.forEach(row => {
@@ -63,7 +68,7 @@ export default class TableCtrl {
         }
     }
 
-    deleteCell() {
+    deleteColumn() {
         const numCell = Number(prompt("Enter the cell number that you want to delete", ""));
         if (numCell <= this.tableContent[0].length && numCell > 0) {
             this.tableContent.forEach(row => {
@@ -93,13 +98,14 @@ export default class TableCtrl {
     deleteRow() {
         const numRow = Number(prompt("Enter the row number that you want to delete", ""));
         if (numRow <= this.tableContent.length && numRow > 0) {
+            console.log(this.tableContent);
             this.tableContent.splice(numRow - 1, 1);
             this.TableService.saveTableData(this.tableContent);
             this.rows = JSON.parse(localStorage.tableContent);
         } else {
             alert("Такого ряда нет:)");
         }
-    }
+    }*/
 
     move(key) {
         this.scope.$apply(() => {

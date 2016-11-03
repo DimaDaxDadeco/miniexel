@@ -12,6 +12,7 @@ angular
       "table",
       "tw.directives.clickOutside",
       "services",
+      "directives",
       "focus-if"
     ]).config($locationProvider => {
         $locationProvider.html5Mode({
@@ -20,6 +21,6 @@ angular
     });
 }).run(() => {
     if (!localStorage.tableContent) {
-        localStorage.tableContent = JSON.stringify([["1", "2", "3"], ["", "", ""], ["", "", ""]]);
+        localStorage.tableContent = JSON.stringify([["1", "2", "3"], ["c", "s", "e"], ["", "fd", ""]]);
     }
 });
