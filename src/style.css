@@ -37,9 +37,6 @@ title-cell:last-child .cell-title, .cells:last-child .cell {
 cell-item {
     position: relative;
 }
-button.add-delete {
-    margin-top: 20px;
-}
 .cell.selected {
     background: #e6e6e6;
 }

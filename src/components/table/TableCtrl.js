@@ -1,28 +1,27 @@
 export default class TableCtrl {
 
     keyPressHandlers = {
-        left: () => {
+        moveLeft: () => {
             if (this.canMove("left")) {
                 this.TableService.setPosition(this.TableService.position.indexRow, this.TableService.position.indexCell - 1);
             }
         },
-        up: () => {
+        moveUp: () => {
             if (this.canMove("up")) {
                 this.TableService.setPosition(this.TableService.position.indexRow - 1, this.TableService.position.indexCell);
             }
         },
-        right: () => {
+        moveRight: () => {
             if (this.canMove("right")) {
                 this.TableService.setPosition(this.TableService.position.indexRow, this.TableService.position.indexCell + 1);
             }
         },
-        down: () => {
+        moveDown: () => {
             if (this.canMove("down")) {
                 this.TableService.setPosition(this.TableService.position.indexRow + 1, this.TableService.position.indexCell);
             }
         }
     };
-    tableContent = JSON.parse(localStorage.tableContent);
 
     constructor($scope, TableService, KeyboardService, ContextMenuService) {
         this.scope = $scope;
@@ -57,59 +56,15 @@ export default class TableCtrl {
         });
     }
 
-    /*addColumn() {
-        const numCell = Number(prompt("Enter the cell number that you want to add", ""));
-        if (numCell) {
-            this.tableContent.forEach(row => {
-                row.splice(numCell - 1, 0, "");
-            });
-            this.TableService.saveTableData(this.tableContent);
-            this.rows = JSON.parse(localStorage.tableContent);
-        }
-    }
-
-    deleteColumn() {
-        const numCell = Number(prompt("Enter the cell number that you want to delete", ""));
-        if (numCell <= this.tableContent[0].length && numCell > 0) {
-            this.tableContent.forEach(row => {
-                row.splice(numCell - 1, 1);
-            });
-            this.TableService.saveTableData(this.tableContent);
-            this.rows = JSON.parse(localStorage.tableContent);
-        } else {
-            alert("Такой колонки нет:)");
-        }
-    }
-
-    addRow() {
-        const numRow = Number(prompt("Enter the row number that you want to add", ""));
-        if (numRow) {
-            const length = this.tableContent[0].length;
-            const emptyArray = [];
-            for (let i = 0; i < length; i++) {
-                emptyArray[i] = "";
-            }
-            this.tableContent.splice(numRow - 1, 0, emptyArray);
-            this.TableService.saveTableData(this.tableContent);
-            this.rows = JSON.parse(localStorage.tableContent);
-        }
-    }
-
-    deleteRow() {
-        const numRow = Number(prompt("Enter the row number that you want to delete", ""));
-        if (numRow <= this.tableContent.length && numRow > 0) {
-            console.log(this.tableContent);
-            this.tableContent.splice(numRow - 1, 1);
-            this.TableService.saveTableData(this.tableContent);
-            this.rows = JSON.parse(localStorage.tableContent);
-        } else {
-            alert("Такого ряда нет:)");
-        }
-    }*/
-
     move(key) {
+        const keys = {
+            left: "moveLeft",
+            up: "moveUp",
+            right: "moveRight",
+            down: "moveDown"
+        };
         this.scope.$apply(() => {
-            this.keyPressHandlers[key]();
+            this.keyPressHandlers[keys[key]]();
         });
     }
 

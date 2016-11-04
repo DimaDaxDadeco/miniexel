@@ -53,6 +53,9 @@ export default class CellCtrl {
     }
 
     checkKeystroke(e) {
-        return [13, 37, 38, 39, 40].includes(e.keyCode);
+        const enterKey = 13;
+        const isEnterKey = e.keyCode === enterKey;
+        const isArrowKey = e.keyCode >= 37 && e.keyCode <= 40;
+        return isEnterKey || isArrowKey;
     }
 }
