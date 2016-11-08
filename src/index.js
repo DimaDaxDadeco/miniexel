@@ -19,8 +19,8 @@ angular
         enabled: true,
         requireBase: false
     });
-}).run(() => {
-    if (!localStorage.tableContent) {
-        localStorage.tableContent = JSON.stringify([["1", "2", "3"], ["c", "s", "e"], ["", "fd", ""]]);
-    }
+}).run((localStorageService) => {
+  if (!localStorageService.get("tableContent")) {
+    localStorageService.set("tableContent", [["1", "2", "3"], ["c", "s", "e"], ["", "fd", ""]]);
+  }
 });

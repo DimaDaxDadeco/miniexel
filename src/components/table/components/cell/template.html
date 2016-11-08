@@ -12,7 +12,7 @@
     ng-click="$ctrl.selectCell(false)"
     ng-dblclick="$ctrl.toggleEdit()"
     ng-class="{'selected': $ctrl.selected}"
-    ng-right-click="$ctrl.toggleContextMenu($event, true)"
+    ng-right-click="$ctrl.show($event)"
 >
     {{$ctrl.cellContent}}
 </span>

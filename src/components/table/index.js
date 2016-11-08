@@ -5,7 +5,7 @@ import TableCtrl from "./TableCtrl";
 import TableTemplate from "./TableTemplate.html";
 import RowComponent from "./components/row";
 import CellComponent from "./components/cell";
-import TitleCellComponent from "./components/title-cell";
+import HeaderTableComponent from "./components/header";
 import contextMenu from "./components/context-menu/component";
 
 angular.module("table", [])
@@ -23,5 +23,5 @@ angular.module("table", [])
     .service("ContextMenuService", ContextMenuService)
     .component("rowItem", RowComponent)
     .component("cellItem", CellComponent)
-    .component("titleCell", TitleCellComponent)
+    .component("headerTable", HeaderTableComponent)
     .component("contextMenu", contextMenu);

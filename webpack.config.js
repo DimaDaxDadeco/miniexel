@@ -9,7 +9,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: "style!css",
+                loader: "style!css"
             },
             {
                 test: /\.scss$/,
@@ -22,7 +22,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel'
+                loader: "babel"
             }
         ]
     },
@@ -31,8 +31,11 @@ module.exports = {
             path.resolve("./src/")
         ],
         alias: {
-            'components': path.resolve(__dirname, 'src', 'components')
+            "components": path.resolve(__dirname, "src", "components")
         },
-        extensions: ['', '.js']
+        extensions: ["", ".js"],
+        sassLoader: {
+          includePaths: [path.resolve(__dirname, "./src")]
+        }
     }
 };

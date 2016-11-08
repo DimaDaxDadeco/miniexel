@@ -31,7 +31,7 @@ ul {
     line-height:50px;
     text-align: center;
 }
-title-cell:last-child .cell-title, .cells:last-child .cell {
+header-table .cell-title:last-child, .cells:last-child .cell {
     border-right: 1px solid #ccc;
 }
 cell-item {

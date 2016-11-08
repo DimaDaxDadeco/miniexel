@@ -1,13 +1,14 @@
 <div class="row-item">
     <div class="row">
         <div class="col-xs-12">
-            <span class="rowIndex">{{$ctrl.indexRow}}</span>
-                <cell-item class="cells"
-                    ng-repeat="cellContent in $ctrl.cellsContent track by $index"
-                    cell-content="cellContent"
-                    position="{ indexRow: $ctrl.indexRow - 1, indexCell: $index }"
-                >
-                </cell-item>
+            <span class="rowIndex">{{$ctrl.rowIndex}}</span>
+            <cell-item
+                class="cells"
+                ng-repeat="cellContent in $ctrl.cellsContent track by $index"
+                cell-content="cellContent"
+                position="{ rowIndex: $ctrl.rowIndex - 1, cellIndex: $index }"
+            >
+            </cell-item>
         </div>
     </div>
 </div>

@@ -1,12 +1,11 @@
-<context-menu ng-if="$ctrl.contextMenu"></context-menu>
+<context-menu></context-menu>
 <div class="container">
     <div class="row">
         <div id="table" class="clearfix">
             <div class="colIndex">
-                <span class="cell-title">№</span>
-                <title-cell ng-repeat="title in $ctrl.titleList" title="title"></title-cell>
+                <header-table><header-table>
             </div>
-            <row-item ng-repeat="row in $ctrl.rows" cells-content="row" index-row="$index+1">
+            <row-item ng-repeat="row in $ctrl.rows" cells-content="row" row-index="$index+1">
             </row-item>
         </div>
     </div>

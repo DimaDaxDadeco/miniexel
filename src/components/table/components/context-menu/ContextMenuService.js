@@ -1,15 +1,18 @@
 export default class ContextMenuService {
 
-    toggleContextMenu(state, event = { clientX: null, clientY: null }, position = { indexRow: null, indexCell: null }) {
-        this.contextMenu = state;
+    show({ clientX = null, clientY = null }, { rowIndex = null, cellIndex = null }) {
+        this.isContextMenuShowing = true;
         this.coordinates = {
-            coordinateX: event.clientX,
-            coordinateY: event.clientY
+            x: clientX,
+            y: clientY
         };
         this.position = {
-            indexRow: position.indexRow,
-            indexCell: position.indexCell
+            rowIndex,
+            cellIndex
         };
     }
 
+    hide() {
+        this.isContextMenuShowing = false;
+    }
 }

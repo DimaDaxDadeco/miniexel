@@ -39,8 +39,10 @@
     "jshint": "^2.9.4",
     "lodash": "^4.16.5",
     "ng-focus-if": "^1.0.7",
+    "node-sass": "^3.11.2",
+    "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
+    "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
