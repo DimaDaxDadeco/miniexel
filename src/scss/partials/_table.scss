@@ -1,0 +1,39 @@
+#table {
+    margin-top: 20px;
+    .cells {
+        float: left;
+        .cell {
+            @extend .rowIndex;
+            &.selected {
+                background: #e6e6e6;
+            }
+        }
+        &:last-child {
+            .cell {
+                border-right: 1px solid $grey;
+            }
+        }
+    }
+    .colIndex {
+        @extend .cells;
+        .cell-title {
+            @extend .rowIndex;
+            &:last-child {
+                border-right: 1px solid $grey;
+            }
+        }
+    }
+    .rowIndex {
+        display: block;
+        float: left;
+        height: 50px;
+        width: 50px;
+        border: 1px solid $grey;
+        border-right: none;
+        line-height:50px;
+        text-align: center;
+        .row-item {
+            margin-bottom: 10px;
+        }
+    }
+}

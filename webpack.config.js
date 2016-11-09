@@ -13,7 +13,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
+                loaders: ["style", "css", "autoprefixer", "sass"]
             },
             {
                 test: /\.html$/,
@@ -33,9 +33,6 @@ module.exports = {
         alias: {
             "components": path.resolve(__dirname, "src", "components")
         },
-        extensions: ["", ".js"],
-        sassLoader: {
-          includePaths: [path.resolve(__dirname, "./src")]
-        }
+        extensions: ["", ".js"]
     }
 };

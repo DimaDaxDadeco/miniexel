@@ -1,3 +1,4 @@
 import "./";
 import "bootstrap-css";
-import "./style.css";
+import "./scss/main.scss";
+// import "./style.css";
