@@ -2,7 +2,6 @@
     type="text"
     name="text"
     ng-if="$ctrl.editing"
-    ng-keydown="$ctrl.checkKeystroke($event) && $ctrl.save()"
     ng-model="$ctrl.cellContent"
     tw-click-outside="$ctrl.save()"
     focus-if="$ctrl.editing"
@@ -12,7 +11,7 @@
     ng-click="$ctrl.selectCell(false)"
     ng-dblclick="$ctrl.toggleEdit()"
     ng-class="{'selected': $ctrl.selected}"
-    ng-right-click="$ctrl.show($event)"
+    ng-right-click="$ctrl.showContextMenu($event)"
 >
     {{$ctrl.cellContent}}
 </span>

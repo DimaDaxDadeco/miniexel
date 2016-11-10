@@ -23,6 +23,7 @@
     "angular-right-click": "^0.1.0",
     "angular-ui-router": "^0.3.1",
     "autoprefixer": "^6.5.2",
+    "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",

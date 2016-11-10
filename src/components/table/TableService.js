@@ -56,7 +56,16 @@ export default class TableService {
     }
 
     addColumn(where, cellIndex) {
-        const pos = where === "before" ? cellIndex : cellIndex + 1;
+        let pos;
+        if (where === "before") {
+            const nextPosition = Object.assign({}, this.position, {
+                cellIndex: this.position.cellIndex + 1
+            });
+            pos = cellIndex;
+            this.setPosition(nextPosition);
+        } else {
+            pos = cellIndex + 1;
+        }
         this.cellsContent.forEach(row => {
             row.splice(pos, 0, "");
         });
@@ -65,15 +74,29 @@ export default class TableService {
     }
 
     deleteColumn(cellIndex) {
-         this.cellsContent.forEach(row => {
-                row.splice(cellIndex, 1);
+        if (this.canDelete(cellIndex) || this.cellsContent[0].length !== 1) {
+            this.cellsContent.forEach(row => {
+                    row.splice(cellIndex, 1);
             });
-        this.saveTableData(this.cellsContent);
-        this.ContextMenuService.hide();
+            this.saveTableData(this.cellsContent);
+            this.ContextMenuService.hide();
+        } else {
+            alert("Can't delete last column.");
+            this.ContextMenuService.hide();
+        }
     }
 
     addRow(where, rowIndex) {
-        const pos = where === "before" ? rowIndex : rowIndex + 1;
+        let pos;
+        if (where === "before") {
+            const nextPosition = Object.assign({}, this.position, {
+                rowIndex: this.position.rowIndex + 1
+            });
+            pos = rowIndex;
+            this.setPosition(nextPosition);
+        } else {
+            pos = rowIndex + 1;
+        }
         const length = this.cellsContent[0].length;
         const emptyArray = [];
         for (let i = 0; i < length; i++) {
@@ -85,8 +108,15 @@ export default class TableService {
     }
 
     deleteRow(rowIndex) {
-        this.cellsContent.splice(rowIndex, 1);
-        this.saveTableData(this.cellsContent);
-        this.ContextMenuService.hide();
+        if (this.canDelete(rowIndex) || this.cellsContent.length !== 1) {
+            this.cellsContent.splice(rowIndex, 1);
+            this.saveTableData(this.cellsContent);
+            this.ContextMenuService.hide();
+        } else {
+            alert("Can't delete last row.");
+            this.ContextMenuService.hide();
+        }
     }
+
+    canDelete = index => index !== 0;
 }

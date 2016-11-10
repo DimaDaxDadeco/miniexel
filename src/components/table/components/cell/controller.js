@@ -11,23 +11,35 @@ export default class CellCtrl {
 
     init() {
         this.editing = false;
-        this.keyboardServiceOff = false;
-
-        this.KeyboardService.on(key => {
-            if (key === "enter" && this.selected && this.keyboardServiceOff) {
-                this.scope.$apply(() => {
-                    this.toggleEdit();
-                });
-            }
-            this.keyboardServiceOff = true;
-        });
-
+        this.KeyboardService.on(this.onKeypress);
         this.scope.$watch(() => this.TableService.position, () => {
             const { position } = this.TableService;
             if (position) {
                 this.selected = position.rowIndex === this.position.rowIndex && position.cellIndex === this.position.cellIndex;
             }
         });
+    }
+
+    onKeypress = key => {
+        if (!this.selected) {
+            return;
+        }
+        if (key === "enter") {
+            return this.onEnterPress();
+        }
+        const isArrowKey = ["up", "down", "left", "right"].includes(key);
+        if (isArrowKey) {
+            this.save();
+        }
+    }
+
+    onEnterPress = () => {
+        if (this.editing) {
+            this.save();
+        } else {
+            this.toggleEdit();
+        }
+        this.scope.$apply();
     }
 
     selectCell() {
@@ -39,28 +51,14 @@ export default class CellCtrl {
         this.editing = !this.editing;
     }
 
-    show(event) {
+    showContextMenu(event) {
         this.ContextMenuService.show(event, this.position);
-    }
-
-    hide() {
-        this.ContextMenuService.hide();
     }
 
     save() {
         const cellsContent = this.localStorageService.get("tableContent");
-
         cellsContent[this.TableService.position.rowIndex][this.TableService.position.cellIndex] = this.cellContent;
         this.TableService.saveTableData(cellsContent);
-
         this.toggleEdit();
-        this.keyboardServiceOff = false;
-    }
-
-    checkKeystroke(e) {
-        const enterKey = 13;
-        const isEnterKey = e.keyCode === enterKey;
-        const isArrowKey = e.keyCode >= 37 && e.keyCode <= 40;
-        return isEnterKey || isArrowKey;
     }
 }
