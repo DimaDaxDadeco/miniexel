@@ -74,7 +74,7 @@ export default class TableService {
     }
 
     deleteColumn(cellIndex) {
-        if (this.canDelete(cellIndex) || this.cellsContent[0].length !== 1) {
+        if (this.canDelete(cellIndex, this.cellsContent[0].length)) {
             this.cellsContent.forEach(row => {
                     row.splice(cellIndex, 1);
             });
@@ -108,7 +108,7 @@ export default class TableService {
     }
 
     deleteRow(rowIndex) {
-        if (this.canDelete(rowIndex) || this.cellsContent.length !== 1) {
+        if (this.canDelete(rowIndex, this.cellsContent.length)) {
             this.cellsContent.splice(rowIndex, 1);
             this.saveTableData(this.cellsContent);
             this.ContextMenuService.hide();
@@ -118,5 +118,5 @@ export default class TableService {
         }
     }
 
-    canDelete = index => index !== 0;
+    canDelete = (index, length) => index !== 0 || length !== 1;
 }
